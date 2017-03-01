@@ -83,23 +83,19 @@ def write_tweets(tweets, filename):
 
 
 def main():
-    ''' This is a script that continuously searches for tweets
-        that were created over a given number of days. The search
-        dates and search phrase can be changed below. '''
+    ''' This is a script that continuously searches for tweets and search phrase can be changed below. '''
 
 
 
     ''' search variables: '''
-    search_phrases = ['macbook', 'ipad']
+    search_phrases = ['macbook', 'ipad', "ipadpro", 'iphone', 'iphone7', 'iphone8', 'macbookpro', 'applewatch', 'applewatch2' ]
     
     time_limit = 10.0                          # runtime limit in hours
-    max_tweets = 100                           # number of tweets per search (will be
-                                               # iterated over) - maximum is 100
-    min_days_old, max_days_old = 0,9          # search limits e.g., from 7 to 8
-                                               # gives current weekday from last week,
-                                               # min_days_old=0 will search from right now
-    USA = '39.8,-95.583068847656,2500km'       # this geocode includes nearly all American
-                                               # states (and a large portion of Canada)
+    max_tweets = 100                           # number of tweets per search is a maximum is 100
+                                               
+    min_days_old, max_days_old = 0,9          # search limits for exmple from 7 to 8
+                                              
+    USA = '39.8,-95.583068847656,2500km'       # this geocode includes nearly all Toronto and most parts of Canada and all of U.S.A
 
 
     # loop over search items,
@@ -131,7 +127,7 @@ def main():
         # authorize and load the twitter API
         api = load_api()
 
-        # set the 'starting point' ID for tweet collection
+        # set the 'starting point' ID for tweet collecting to start
         if read_IDs:
             # open the json file and get the latest tweet ID
             with open(json_file, 'r') as f:
@@ -139,7 +135,6 @@ def main():
                 max_id = json.loads(lines[-1])['id']
                 print('Searching from the bottom ID in file')
         else:
-            # get the ID of a tweet that is min_days_old
             if min_days_old == 0:
                 max_id = -1
             else:
